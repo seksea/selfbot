@@ -37,7 +37,7 @@ async def on_message(message : discord.message):
                 embed.set_footer(text=config["embeds"]["footer"])
                 for channel in guild.text_channels:
                     try:
-                        lastmsg = await channel.history(limit=1).next()
+                        await channel.history(limit=1).next()
                         embed.add_field(name=channel.name, value=":keyboard:", inline=False)
                     except discord.NoMoreItems:
                         embed.add_field(name=channel.name, value=":keyboard:", inline=False)
