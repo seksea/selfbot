@@ -24,7 +24,7 @@ async def statusTask():
             await asyncio.sleep(status["delay"])
 
 @dClient.event
-async def on_message(message : discord.message):
+async def on_message(message: discord.message):
     if message.author == dClient.user:
         if message.content.startswith(config["config"]["prefix"]):
             command = message.content[1:].split(" ")[0].lower()
@@ -47,13 +47,17 @@ async def on_message(message : discord.message):
                     embed.add_field(name=channel.name, value=":speaker:", inline=False)
                 await message.channel.send("", embed=embed)
             
-            if command == "serverinfo":
+            elif command == "serverinfo":
                 guild = dClient.get_guild(int(args))
                 embed=discord.Embed(title=" ", color=int(config["embeds"]["success color"], 0))
                 embed.set_author(name=f"Info of {guild.name}", icon_url=guild.icon_url)
                 embed.set_footer(text=config["embeds"]["footer"])
                 embed.add_field(name="Channels", value=len(guild.text_channels)+len(guild.voice_channels), inline=False)
                 embed.add_field(name="Members", value=guild.member_count, inline=False)
+                await message.channel.send("", embed=embed)
+
+            elif command == "embed":
+                embed=discord.Embed(title=args, color=int(config["embeds"]["success color"], 0))
                 await message.channel.send("", embed=embed)
 
             await message.delete()
