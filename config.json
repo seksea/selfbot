@@ -1,11 +1,11 @@
 { 
     "config" : {
-        "token" : "putyourtokenhere",
+        "token" : "tokenhere",
         "prefix" : ","
     },
 
     "embeds" : {
-        "footer" : "seksea/selfbot",
+        "footer" : "github.com/seksea/selfbot",
         "success color" : "0x00ff00",
         "error color" : "0xff0000"
     },

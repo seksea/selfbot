@@ -47,12 +47,21 @@ async def on_message(message : discord.message):
                     embed.add_field(name=channel.name, value=":speaker:", inline=False)
                 await message.channel.send("", embed=embed)
             
+            if command == "serverinfo":
+                guild = dClient.get_guild(int(args))
+                embed=discord.Embed(title=" ", color=int(config["embeds"]["success color"], 0))
+                embed.set_author(name=f"Info of {guild.name}", icon_url=guild.icon_url)
+                embed.set_footer(text=config["embeds"]["footer"])
+                embed.add_field(name="Channels", value=len(guild.text_channels)+len(guild.voice_channels), inline=False)
+                embed.add_field(name="Members", value=guild.member_count, inline=False)
+                await message.channel.send("", embed=embed)
+
             await message.delete()
 
 
 @dClient.event
 async def on_ready():
-    print(f"logged in as {dClient.user} and changing status!")
+    print(f"logged in as {dClient.user}!")
     dClient.loop.create_task(statusTask())
 
 dClient.run(config["config"]["token"], bot=False)
